@@ -8,7 +8,7 @@ def galletas():
 
 @app.route("/ventas")
 def ventas():
-    return render_template("layout_galleteria.html", active_page="ventas")
+    return render_template("Ventas.html", active_page="ventas")
 
 @app.route("/produccion")
 def produccion():
@@ -26,12 +26,26 @@ def ordenes():
 def ganancias():
     return render_template("ganancias.html", active_page="ganancias")
 
-@app.route("/administrador")
-def administrador():
-    return render_template("administrador.html", active_page="administrador")
+@app.route("/administracion")
+def administracion():
+    return render_template("Layaut_administracion.html", active_page="administracion")
+
+@app.route("/proveedores")
+def proveedores():
+    return render_template("Proveedores.html", active_page="proveedores")
+
+@app.route("/usuarios")
+def usuarios():
+    return render_template("Usuarios.html", active_page="usuarios")
+
+@app.route("/clientes")
+def clientes():
+    return render_template("Clientes.html", active_page="clientes")
+
+@app.route("/recetas")
+def recetas():
+    return render_template("Recetas.html", active_page="recetas")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
-if __name__ == "__main__":
-    app.run(debug=True, port=3000)

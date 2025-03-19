@@ -1,0 +1,39 @@
+{%extends "Layaut_nav.html"%}
+{%block links%}
+    <link href="{{ url_for('static', filename='css/estilos_ventas.css') }}" rel="stylesheet" type="text/css" />
+{%endblock%}
+
+{%block container%}
+    <main class="main">
+        <div class="select-container">
+            <select id="tipo_venta" onchange="">
+
+            </select>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Importe</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tblDetalleVenta">
+
+            </tbody>
+        </table>
+        <div class="extra-section">
+            <div class="button-container">
+                <button class="btn" onclick="">Ventas del día</button>
+                <button class="btn" onclick=""><img src="{{ url_for('static', filename='img/galleta.png') }}" alt="" width="30" height="30"/></button>
+                <button class="btn" onclick="">Cobrar</button>
+                
+                <div class="total-price">
+                    <span>Total: </span><span id="total-importe">$00.00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+{%endblock%}

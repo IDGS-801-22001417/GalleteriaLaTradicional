@@ -1,0 +1,20 @@
+{%extends "Layaut_nav.html"%}
+{%block links%}
+    <link href="{{ url_for('static', filename='css/estilos_nav_admin.css') }}" rel="stylesheet" type="text/css" />
+    {%block links2%}
+        
+    {%endblock%}
+{%endblock%}
+
+{% block container %}
+    <nav class="nav_admin">
+        <a href="{{ url_for('proveedores') }}" class="{{ 'activo' if active_page == 'proveedores' else '' }}">Proveedores</a>
+        <a href="{{ url_for('usuarios') }}" class="{{ 'activo' if active_page == 'usuarios' else '' }}">Usuarios</a>
+        <a href="{{ url_for('clientes') }}" class="{{ 'activo' if active_page == 'clientes' else '' }}">Clientes</a>
+        <a href="{{ url_for('recetas') }}" class="{{ 'activo' if active_page == 'recetas' else '' }}">Recetas</a>
+    </nav>
+    
+    {% block contenido %}
+
+    {% endblock %}
+{% endblock %}

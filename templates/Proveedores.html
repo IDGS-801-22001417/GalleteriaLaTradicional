@@ -1,0 +1,29 @@
+{%extends "Layaut_administracion.html"%}
+{% block links2 %}
+    <link href="{{ url_for('static', filename='css/estilos_proveedores.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block contenido %}
+<main class="main">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Proveedor</th>
+                <th>Dirección</th>
+                <th>Fecha de Inicio</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tblProveedores">
+
+        </tbody>
+    </table>
+    <div class="extra-section">
+        <div class="button-container">
+            <button class="btn" onclick="">Agregar</button>
+            <button class="btn" onclick="">Buscar</button>
+        </div>
+    </div>
+</main>
+{% endblock %}

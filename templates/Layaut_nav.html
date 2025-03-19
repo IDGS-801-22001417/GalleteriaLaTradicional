@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galleteria - La tradicional</title>
-    <link href="{{ url_for('static', filename='css/estilos_layout_galleteria.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/estilos_nav.css') }}" rel="stylesheet" type="text/css" />
+    {% block links %}
+
+    {% endblock %}
 </head>
 
 <body>
@@ -19,7 +22,7 @@
             <a href="{{ url_for('insumos') }}" class="{{ 'activo' if active_page == 'insumos' else '' }}">Insumos</a>
             <a href="{{ url_for('ordenes') }}" class="{{ 'activo' if active_page == 'ordenes' else '' }}">Ordenes</a>
             <a href="{{ url_for('ganancias') }}" class="{{ 'activo' if active_page == 'ganancias' else '' }}">Ganancias</a>
-            <a href="{{ url_for('administrador') }}" class="{{ 'activo' if active_page == 'administrador' else '' }}">Administrador</a>
+            <a href="{{ url_for('administracion') }}" class="{{ 'activo' if active_page == 'administracion' else '' }}">Administración</a>
         </nav>
     </header>
 
