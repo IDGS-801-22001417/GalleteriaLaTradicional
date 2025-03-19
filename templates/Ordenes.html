@@ -1,0 +1,89 @@
+<link href="{{ url_for('static', filename='css/estilos_insumos.css') }}" rel="stylesheet" type="text/css" />
+<link href="../static/css/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+
+{% extends "layout_galleteria.html" %}
+{% block container %}
+
+<main class="main">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Galleta</th>
+                <th>Receta</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tblInsumos">
+
+        </tbody>
+    </table>
+
+
+    <div class="extra-section">
+        <div>
+            <h3>Alertas del día</h3>
+            <div id="alertas" class="alertas" style="padding: 10px; border: 1px solid #ccc;"></div>
+
+        </div>
+        <div>
+            <button id="boton_compra" onclick="Agregarinsumo()">
+                <img src="{{ url_for('static', filename='img/nuevo_insumo.png') }}" alt="">
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Merma-->
+    <div id="modalMerma" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Merma Insumos</h2>
+            <form id="formulario-comparar">
+                <label for="insumo">Insumo:</label>
+                <input type="text" id="insumomerma" name="insumomerma" required disabled="">
+                <label for="descripcion">Descripción:</label>
+                <br>
+                <textarea class="textarea" id="descripccionerma" name="descripccionerma" required></textarea>
+                <br>
+                <label for="cantidadmerma">Cantidad:</label>
+                <input type="text" id="cantidadmerma" name="cantidadmerma" required oninput="validarNumero(this)">
+                <label for="fechamerma">Fecha:</label>
+                <input type="text" id="fechamerma" name="fechamerma" required disabled="">
+                <div class="modal-buttons">
+                    <button type="button" onclick="enviarMerma()">Guardar</button>
+                    <button type="button" onclick="cerrarModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Agregar-->
+    <div id="modalAgregar" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModalAgregar()">&times;</span>
+            <h2>Agregar Insumos</h2>
+            <form id="formulario-comparar">
+                <label for="orden">Orden de compra:</label>
+                <input type="text" id="ordenCompra" name="ordenCompra" required>
+                <button id="buscarBtn">Buscar</button> <!-- Botón para buscar -->
+                <label for="insumos">Insumos:</label>
+                <br>
+                <textarea class="textarea" id="insumosAgregar" name="insumosAgregar" required disabled></textarea>
+                <br>
+                <label for="fechamerma">Fecha:</label>
+                <input type="text" id="fechaagregar" name="fechamerma" required disabled>
+                <div class="modal-buttons">
+                    <button type="button" onclick="actualizarEstatusCompra(event)">Guardar</button>
+                    <button type="button" onclick="cerrarModalAgregar()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</main>
+
+{% endblock %}

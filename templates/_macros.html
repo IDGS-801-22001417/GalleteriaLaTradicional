@@ -1,0 +1,122 @@
+{% macro texto(field=None, name="", placeholder="", value="", label="") %}
+    {% if field %}
+        <label for="{{ field.id }}">{{ field.label.text }}:</label>
+        <p>
+            {{ field(placeholder=placeholder, value=value, **kwargs) | safe }}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li style="color: red;">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+    {% else %}
+        <label for="{{ name }}">{{ label if label else name }}:</label>
+        <p>
+            <input type="text" name="{{ name }}" id="{{ name }}" placeholder="{{ placeholder }}" value="{{ value }}">
+        </p>
+    {% endif %}
+{% endmacro %}
+
+{% macro numero(field=None, name="", placeholder="", value="", label="", min="", max="") %}
+    {% if field %}
+        <label for="{{ field.id }}">{{ field.label.text }}:</label>
+        <p>
+            {{ field(placeholder=placeholder, value=value, min=min, max=max, **kwargs) | safe }}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li style="color: red;">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+    {% else %}
+        <label for="{{ name }}">{{ label if label else name }}:</label>
+        <p>
+            <input type="number" name="{{ name }}" id="{{ name }}" placeholder="{{ placeholder }}" value="{{ value }}" min="{{ min }}" max="{{ max }}">
+        </p>
+    {% endif %}
+{% endmacro %}
+
+{% macro select(field=None, name="", options=[], label="", selected="") %}
+    {% if field %}
+        <label for="{{ field.id }}">{{ field.label.text }}:</label>
+        <p>
+            {{ field(**kwargs) | safe }}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li style="color: red;">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+    {% else %}
+        <label for="{{ name }}">{{ label if label else name }}:</label>
+        <p>
+            <select name="{{ name }}" id="{{ name }}">
+                {% for option in options %}
+                    <option value="{{ option.value }}" {% if option.value == selected %}selected{% endif %}>{{ option.text }}</option>
+                {% endfor %}
+            </select>
+        </p>
+    {% endif %}
+{% endmacro %}
+
+{% macro radio(field=None, name="", options=[], label="", checked_value="") %}
+    {% if field %}
+        <label for="{{ field.id }}">{{ field.label.text }}:</label>
+        <p>
+            {{ field(**kwargs) | safe }}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li style="color: red;">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+    {% else %}
+        <div>
+            <label>{{ label if label else name }}:</label>
+            <div style="display: inline-block; margin-left: 10px;">
+                {% for option in options %}
+                    <div style="display: inline-block; margin-right: 10px;">
+                        <input type="radio" id="{{ name }}_{{ option.value }}" name="{{ name }}" value="{{ option.value }}" {% if option.value == checked_value %}checked{% endif %}>
+                        <label for="{{ name }}_{{ option.value }}" style="margin-left: 5px;">{{ option.text }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro checkbox(field=None, name="", options=[], label="", checked_values=[]) %}
+    {% if field %}
+        <label for="{{ field.id }}">{{ field.label.text }}:</label>
+        <p>
+            {{ field(**kwargs) | safe }}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li style="color: red;">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+    {% else %}
+        <div>
+            <label>{{ label if label else name }}:</label>
+            <div style="display: inline-block; margin-left: 10px;">
+                {% for option in options %}
+                    <div style="display: inline-block; margin-right: 10px;">
+                        <input type="checkbox" id="{{ name }}_{{ option.value }}" name="{{ name }}" value="{{ option.value }}" {% if option.value in checked_values %}checked{% endif %}>
+                        <label for="{{ name }}_{{ option.value }}" style="margin-left: 5px;">{{ option.text }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}

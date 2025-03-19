@@ -1,0 +1,193 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQFmp7HQWD4DgAn8A7lLLOmDL7JHEuHjVNcbPttI3lCz2Pr8rYcmD2Dlc" crossorigin="anonymous">
+<link href="{{ url_for('static', filename='css/estilos_insumos.css') }}" rel="stylesheet" type="text/css" />
+
+{% import "_macros.html" as macros %}
+{% extends "layout_galleteria.html" %}
+{% block container %}
+
+<main class="main">
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Insumo</th>
+                    <th>Cantidad</th>
+                    <th>Unidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ins in insumos %}
+                <tr class="bg-white border -b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ins.nombreInsumo}}</td>
+                    <td class="px-6 py-3">{{ins.total}}</td>
+                    <td class="px-6 py-3">{{ins.unidad}}</td>
+                    <td class="px-6 py-3 text-rigth whitespace-nowrap">
+                        <a href="youtube.com"
+                            class="flex items-center grap-2 bg-orange-500 text-white px-4 py-2 hover:bg-orange-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="17.5" viewBox="0 0 448 512">
+                                <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                <path fill="#000000"
+                                    d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z" />
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="extra-section">
+        <div>
+            <h3>Alertas del día</h3>
+            <div id="alertas" class="alertas" style="padding: 10px; border: 1px solid #ccc;"></div>
+        </div>
+        <div>
+            <!-- Botón para abrir el modal usando JavaScript personalizado -->
+            <button id="boton_compra" onclick="abrirModalAgregar()">
+                <img src="{{ url_for('static', filename='img/nuevo_insumo.png') }}" alt="">
+            </button>
+            <button id="boton_compra" onclick="abrirModalMerma()">
+                <img src="{{ url_for('static', filename='img/pagos_proveedor.png') }}" alt="">
+            </button>
+            <button id="boton_compra" onclick="abrirModalAgregar()">
+                <img src="{{ url_for('static', filename='img/compras_entregadas.png') }}" alt="">
+            </button>
+            <button id="boton_compra" onclick="abrirModalMerma()">
+                <img src="{{ url_for('static', filename='img/comprar_insumos.png') }}" alt="">
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Merma-->
+    <div id="modalMerma" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Merma Insumos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formulario-comparar">
+                        <label for="insumo">Insumo:</label>
+                        <input type="text" id="insumomerma" name="insumomerma" required disabled="">
+                        <label for="descripcion">Descripción:</label>
+                        <br>
+                        <textarea class="textarea" id="descripccionerma" name="descripccionerma" required></textarea>
+                        <br>
+                        <label for="cantidadmerma">Cantidad:</label>
+                        <input type="text" id="cantidadmerma" name="cantidadmerma" required
+                            oninput="validarNumero(this)">
+                        <label for="fechamerma">Fecha:</label>
+                        <input type="text" id="fechamerma" name="fechamerma" required disabled="">
+                        <div class="modal-buttons">
+                            <button type="button" data-dismiss="modal">Guardar</button>
+                            <button type="button" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Registrar insumo -->
+    <div id="modalRegistrar" class="modal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registar Insumo</h5>
+                    <button type="button" class="close" onclick="cerrarModalAgregar()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formulario-comparar">
+                        <label for="orden">Orden de compra:</label>
+                        <input type="text" id="ordenCompra" name="ordenCompra" required>
+                        <button id="buscarBtn">Buscar</button>
+                        <label for="insumos">Insumos:</label>
+                        <br>
+                        <textarea class="textarea" id="insumosAgregar" name="insumosAgregar" required
+                            disabled></textarea>
+                        <br>
+                        <label for="fechamerma">Fecha:</label>
+                        <input type="text" id="fechaagregar" name="fechamerma" required disabled>
+                        <div class="modal-buttons">
+                            <button type="button" onclick="cerrarModalAgregar()">Cancelar</button>
+                            <button type="button">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Realizar compra -->
+    <div id="modalAgregar" class="modal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Insumos</h5>
+                    <button type="button" class="close" onclick="cerrarModalAgregar()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formulario-comparar">
+                        <!-- Campo de texto -->
+                        {{ macros.texto(field=form.ordenCompra, placeholder="Ingresa la orden de compra", label="Orden de compra") }}
+    
+                        <!-- Campo de número -->
+                        {{ macros.numero(field=form.cantidad, placeholder="Ingresa la cantidad", label="Cantidad", min="0") }}
+    
+                        <!-- Campo de select -->
+                        {%
+                            set tipos_insumo = [
+                                {"value": "1", "text": "Insumo 1"},
+                                {"value": "2", "text": "Insumo 2"},
+                                {"value": "3", "text": "Insumo 3"}
+                            ]
+                        %}
+                        {{ macros.select(field=form.tipoInsumo, options=tipos_insumo, label="Tipo de insumo", selected="1") }}
+    
+                        <!-- Campo de radio -->
+                        {%
+                            set estados = [
+                                {"value": "activo", "text": "Activo"},
+                                {"value": "inactivo", "text": "Inactivo"}
+                            ]
+                        %}
+                        {{ macros.radio(field=form.estado, options=estados, label="Estado", checked_value="activo") }}
+    
+                        <!-- Campo de checkbox -->
+                        {%
+                            set opciones = [
+                                {"value": "opcion1", "text": "Opción 1"},
+                                {"value": "opcion2", "text": "Opción 2"}
+                            ]
+                        %}
+                        {{ macros.checkbox(field=form.opciones, options=opciones, label="Opciones", checked_values=["opcion1"]) }}
+    
+                        <div class="modal-buttons">
+                            <button type="button" onclick="cerrarModalAgregar()">Cancelar</button>
+                            <button type="button">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Registrar pedidos de la compra -->
+
+    <!-- Modal Pagos proveedor -->
+</main>
+
+<script src="{{ url_for('static', filename='js/insumos.js') }}"></script>
+
+{% endblock %}
