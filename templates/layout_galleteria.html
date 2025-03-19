@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Galletería Don Galleto{% endblock %}</title>
+    <link href="{{ url_for('static', filename='css/estilos.css') }}" rel="stylesheet" type="text/css"/>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='img/galleto.png') }}" alt="Logo Don Galleto" class="logo">
+            <h1>GALLETERÍA DON GALLETO</h1>
+        </div>
+        <nav class="nav">
+            <a href="{{ url_for('insumos') }}" class="{% if active_page == 'insumos' %}activo{% endif %}">Insumos</a>
+            <a href="{{ url_for('ventas') }}" class="{% if active_page == 'ventas' %}activo{% endif %}">Ventas</a>
+            <a href="{{ url_for('produccion') }}" class="{% if active_page == 'produccion' %}activo{% endif %}">Producción</a>
+            <a href="{{ url_for('galletas') }}" class="{% if active_page == 'galletas' %}activo{% endif %}">Galletas</a>
+            <a href="{{ url_for('ordenes') }}" class="{% if active_page == 'ordenes' %}activo{% endif %}">Compras</a>
+            <a href="{{ url_for('ganancias') }}" class="{% if active_page == 'ganancias' %}activo{% endif %}">Ganancias</a>
+        </nav>
+    </header>
+    
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Galletería Don Galleto. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
