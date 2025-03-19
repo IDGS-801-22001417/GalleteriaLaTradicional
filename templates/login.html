@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="slide navbar style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='img/LOGO DEL GALLETAS.png') }}" alt="Logo">
+    </div>
+
+    <div class="main">    
+        <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup">
+            <form>
+                <label for="chk" aria-hidden="true">Registrate</label>
+                <input type="text" name="userName" placeholder="Nombre de Usuario" required="">
+                <input type="email" name="email" placeholder="Correo" required="">
+                <input type="number" name="tel" placeholder="Telefono" required="">
+                <input type="password" name="pswd" placeholder="Contraseña" required="">
+                <button>Registrate</button>
+            </form>
+        </div>
+        <div class="login">
+            <form method="POST" action="/login">
+                <label for="chk" aria-hidden="true">Iniciar Sesion</label>
+                <input type="email" name="userName" placeholder="Nombre de Usuario" required="">
+                <input type="password" name="pswd" placeholder="Contraseña" required="">
+                <div class="g-recaptcha" data-sitekey="6Lfzv_gqAAAAACe6rNuoX0zGOsCe3Ltjfb9P6dZU"></div>
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
