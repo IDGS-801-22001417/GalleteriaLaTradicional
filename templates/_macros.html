@@ -1,0 +1,21 @@
+{% macro campo_form(field) %}
+    <div class="mb-3">
+        <label class="form-label fs-5">{{ field.label }} :</label>
+
+        {% if field.type == 'TextAreaField' %}
+            {{ field(class="form-control", rows="4") | safe }}
+        {% elif field.type == 'HiddenField' %}
+            {{ field() | safe }}
+        {% else %}
+            {{ field(class="form-control") | safe }}
+        {% endif %}
+
+        {% if field.errors %}
+            <div class="text-danger mt-1">
+                {% for error in field.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
