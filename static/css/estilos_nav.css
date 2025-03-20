@@ -1,13 +1,13 @@
-body {
+.custom-background {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #d17a45;
 }
 
-.header {
+.custom-header {
     margin-left: 200px;
-    margin-top: 55px;
+    margin-top: 30px;
     margin-bottom: 20px;
     background-color: #a65323;
     color: #fff;
@@ -18,7 +18,7 @@ body {
     border-radius: 50px;
 }
 
-.logo {
+.custom-logo {
     margin-top: 13px;
     margin-left: 15px;
     width: 125px;
@@ -28,12 +28,12 @@ body {
     left: 20px;
 }
 
-.nav {
+.custom-nav {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.nav a {
+.custom-nav a {
     color: #fff;
     text-decoration: none;
     margin: 0 15px;
@@ -42,7 +42,7 @@ body {
     padding-right: 10px;
 }
 
-.nav a.activo {
+.custom-nav a.custom-active {
     color: white;
     font-weight: bold;
     text-decoration: underline;

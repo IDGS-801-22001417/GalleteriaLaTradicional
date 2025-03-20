@@ -1,39 +1,41 @@
-.table {
+.custom-table-container {
+    max-height: 300px; 
+    overflow-y: auto;
+}
+
+.custom-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
     background-color: #ECC4A6;
 }
 
-.table th,
-.table td {
+.custom-table th {
+    background-color: #F1B384;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.custom-table th,
+.custom-table td {
     border: 1px solid #a65323;
     padding: 15px;
     text-align: center;
 }
-
-.table th {
-    background-color: #F1B384;
-}
-.main {
+.custom-main {
     padding: 20px;
 }
-
-.extra-section {
+.custom-extra-section {
     background-color: #ECC4A6;
     padding: 20px;
     margin-top: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.button-container {
-    display: flex;
-    justify-content: space-around;
-    gap: 15px;
-    margin-bottom: 20px;
+.custom-button-container {
+    margin-bottom: 0px;
 }
-
-.button-container .btn {
+.custom-button-container .custom-btn {
     background-color: #a65323;
     color: white;
     padding: 10px 20px;
@@ -42,11 +44,10 @@
     cursor: pointer;
     font-weight: bold;
 }
-
-.button-container .btn:hover {
+.custom-button-container .custom-btn:hover {
     background-color: #e09566;
 }
-.btn {
+.custom-btn {
     background-color: #f5c19b;
     border: 1px solid #a65323;
     padding: 10px 20px;
@@ -55,20 +56,7 @@
     font-weight: bold;
     color: #a65323;
 }
-
-.btn:hover {
+.custom-btn:hover {
     background-color: #e09566;
     color: #fff;
-}
-.total-price {
-    font-size: 20px;
-    color: #a65323;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.total-price span {
-    font-size: 16px;
-    color: #444;
 }

@@ -3,15 +3,15 @@ from wtforms import StringField, PasswordField, EmailField, FloatField, DateFiel
 from wtforms import validators
 
 class EmpleadoForm(Form):
-    apPaterno = StringField('Apellido Paterno', [
+    apPaterno = StringField('Apellido Paterno:', [
         validators.InputRequired(message="El apellido paterno es obligatorio."),
         validators.Length(max=20, message="Máximo 20 caracteres.")
     ])
-    apMaterno = StringField('Apellido Materno', [
+    apMaterno = StringField('Apellido Materno:', [
         validators.InputRequired(message="El apellido materno es obligatorio."),
         validators.Length(max=20, message="Máximo 20 caracteres.")
     ])
-    nombre = StringField('Nombre(s)', [
+    nombre = StringField('Nombre(s):', [
         validators.InputRequired(message="El nombre es obligatorio."),
         validators.Length(max=50, message="Máximo 50 caracteres.")
     ])
@@ -20,60 +20,60 @@ class EmpleadoForm(Form):
         ('M', 'Mujer'),
         ('O', 'Otro')
     ], validators=[validators.InputRequired(message="El género es obligatorio.")])
-    telefono = StringField('Teléfono', [
+    telefono = StringField('Teléfono:', [
         validators.InputRequired(message="El teléfono es obligatorio."),
         validators.Length(min=10, max=10, message="El teléfono debe tener 10 dígitos.")
     ])
-    calle = StringField('Calle', [
+    calle = StringField('Calle:', [
         validators.InputRequired(message="La calle es obligatoria."),
         validators.Length(max=50, message="Máximo 50 caracteres.")
     ])
-    numero = IntegerField('Número', [
+    numero = IntegerField('Número:', [
         validators.InputRequired(message="El número es obligatorio.")
     ])
-    colonia = StringField('Colonia', [
+    colonia = StringField('Colonia:', [
         validators.InputRequired(message="La colonia es obligatoria."),
         validators.Length(max=50, message="Máximo 50 caracteres.")
     ])
-    codigoPostal = IntegerField('Código Postal', [
+    codigoPostal = IntegerField('Código Postal:', [
         validators.InputRequired(message="El código postal es obligatorio.")
     ])
-    email = EmailField('Correo Electrónico', [
+    email = EmailField('Correo Electrónico:', [
         validators.InputRequired(message="El correo electrónico es obligatorio."),
         validators.Email(message="Ingresa un correo electrónico válido.")
     ])
-    fechaNacimiento = DateField('Fecha de Nacimiento', [
+    fechaNacimiento = DateField('Fecha de Nacimiento:', [
         validators.InputRequired(message="La fecha de nacimiento es obligatoria.")
     ], format='%Y-%m-%d')
-    nombreUsuario = StringField('Nombre de Usuario', [
+    nombreUsuario = StringField('Nombre de Usuario:', [
         validators.InputRequired(message="El nombre de usuario es obligatorio."),
         validators.Length(max=20, message="Máximo 20 caracteres.")
     ])
-    contrasenia = PasswordField('Contraseña', [
+    contrasenia = PasswordField('Contraseña:', [
         validators.InputRequired(message="La contraseña es obligatoria."),
         validators.Length(min=8, max=16, message="La contraseña debe tener entre 8 y 16 caracteres.")
     ])
-    rol = SelectField('Rol', choices=[
+    rol = SelectField('Rol:', choices=[
         ('ADMI', 'Administrador'),
         ('CAJA', 'Cajero'),
         ('PROD', 'Producción')
     ], validators=[validators.InputRequired(message="El rol es obligatorio.")])
-    puesto = StringField('Puesto', [
+    puesto = StringField('Puesto:', [
         validators.InputRequired(message="El puesto es obligatorio."),
         validators.Length(max=45, message="Máximo 45 caracteres.")
     ])
-    curp = StringField('CURP', [
+    curp = StringField('CURP:', [
         validators.InputRequired(message="El CURP es obligatorio."),
         validators.Length(min=18, max=18, message="El CURP debe tener 18 caracteres.")
     ])
-    rfc = StringField('RFC', [
+    rfc = StringField('RFC:', [
         validators.InputRequired(message="El RFC es obligatorio."),
         validators.Length(min=13, max=13, message="El RFC debe tener 13 caracteres.")
     ])
-    salarioBruto = FloatField('Salario Bruto', [
+    salarioBruto = FloatField('Salario Bruto:', [
         validators.InputRequired(message="El salario bruto es obligatorio."),
         validators.NumberRange(min=0, message="El salario no puede ser negativo.")
     ])
-    fechaIngreso = DateField('Fecha de Ingreso', [
+    fechaIngreso = DateField('Fecha de Ingreso:', [
         validators.InputRequired(message="La fecha de ingreso es obligatoria.")
     ], format='%Y-%m-%d')
