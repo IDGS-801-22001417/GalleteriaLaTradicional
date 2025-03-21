@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galleteria - La tradicional</title>
+    <link href="{{ url_for('static', filename='css/estilos_nav.css') }}" rel="stylesheet" type="text/css" />
+    {% block links %}
+
+    {% endblock %}
+</head>
+
+<body class="custom-background">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" class="custom-logo">
+
+    <header class="custom-header">
+        <nav class="custom-nav">
+            <a href="{{ url_for('galletas') }}" class="{{ 'custom-active' if active_page == 'galletas' else '' }}">Galletas</a>
+            <a href="{{ url_for('ventas') }}" class="{{ 'custom-active' if active_page == 'ventas' else '' }}">Ventas</a>
+            <a href="{{ url_for('produccion') }}" class="{{ 'custom-active' if active_page == 'produccion' else '' }}">Producción</a>
+            <a href="{{ url_for('insumos') }}" class="{{ 'custom-active' if active_page == 'insumos' else '' }}">Insumos</a>
+            <a href="{{ url_for('ordenes') }}" class="{{ 'custom-active' if active_page == 'ordenes' else '' }}">Ordenes</a>
+            <a href="{{ url_for('ganancias') }}" class="{{ 'custom-active' if active_page == 'ganancias' else '' }}">Ganancias</a>
+            <a href="{{ url_for('administracion') }}" class="{{ 'custom-active' if active_page == 'administracion' else '' }}">Administración</a>
+        </nav>
+    </header>
+
+    {% block container %}
+
+    {% endblock %}
+</body>
+
+</html>
