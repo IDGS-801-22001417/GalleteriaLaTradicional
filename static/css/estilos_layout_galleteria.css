@@ -7,7 +7,11 @@ body {
 
 .header {
     margin-left: 200px;
+<<<<<<< HEAD
     margin-top: 40px;
+=======
+    margin-top: 55px;
+>>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64
     margin-bottom: 20px;
     background-color: #a65323;
     color: #fff;
@@ -19,8 +23,13 @@ body {
 }
 
 .logo {
+<<<<<<< HEAD
     margin-top: 3px;
     margin-left: 13px;
+=======
+    margin-top: 13px;
+    margin-left: 15px;
+>>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64
     width: 125px;
     height: 125px;
     position: absolute;
@@ -46,4 +55,26 @@ body {
     color: white;
     font-weight: bold;
     text-decoration: underline;
+<<<<<<< HEAD
 }
+=======
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #ECC4A6;
+}
+
+.table th,
+.table td {
+    border: 1px solid #a65323;
+    padding: 10px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #F1B384;
+}
+>>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64

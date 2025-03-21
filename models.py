@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
+<<<<<<< HEAD
 import datetime
 db = SQLAlchemy()
 
@@ -73,3 +74,14 @@ class LoteInsumo(db.Model):
     fechaCaducidad = db.Column(db.Date, nullable=False)
     cantidad = db.Column(db.Integer, nullable=False)
     costo = db.Column(db.Numeric(10, 2), nullable=False)
+=======
+db = SQLAlchemy()
+
+class Receta(db.Model):
+    __tablename__ = 'receta'
+    idReceta = db.Column(db.Integer, primary_key=True)
+    nombreReceta = db.Column(db.String(50), nullable=False)
+    ingredientes = db.Column(db.JSON, nullable=False)
+    Descripccion = db.Column(db.Text)
+    estatus = db.Column(db.Integer, default=1)
+>>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64

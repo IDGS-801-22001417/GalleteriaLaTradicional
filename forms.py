@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from wtforms import Form
 <<<<<<< HEAD
 from wtforms import StringField, PasswordField, EmailField, FloatField, DateField, IntegerField, SelectField
@@ -87,3 +88,17 @@ class UserForm2(Form):
         validators.DataRequired(message='El total es requerido')
     ])
 >>>>>>> 7e3fd8070f77aff622f8ed40d20694162f7d7252
+=======
+from flask_wtf import FlaskForm
+from wtforms import StringField, TextAreaField, HiddenField
+from wtforms import validators
+
+class RecetaForm(FlaskForm):
+    nombreReceta = StringField("Nombre de la receta", [
+        validators.DataRequired(message="El campo es requerido")
+    ])
+    descripcion = TextAreaField("Descripción de la receta", [
+        validators.DataRequired(message="El campo es requerido")
+    ])
+    ingredientes = HiddenField()
+>>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64

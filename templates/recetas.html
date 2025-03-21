@@ -1,0 +1,110 @@
+{% extends "layout_galleteria.html" %}
+{% import '_macros.html' as macros %}
+{% block container %}
+
+<head>
+    <meta charset="UTF-8">
+    <h1><title>Agregar Receta</title></h1>
+    <script>
+        function agregarIngrediente() {
+            const contenedor = document.getElementById('ingredientes');
+            const index = contenedor.children.length + 1;
+
+            const campo = document.createElement('div');
+            campo.classList.add('mb-2');
+            campo.innerHTML = `
+                <input type="text" name="insumo[]" placeholder="Nombre del insumo" required>
+                <input type="number" name="cantidad[]" placeholder="Cantidad" required>
+                <input type="text" name="unidad[]" placeholder="Unidad (g, ml, piezas)" required>
+                <button type="button" onclick="this.parentNode.remove()">Eliminar</button>
+            `;
+            contenedor.appendChild(campo);
+        }
+    </script>
+</head>
+<body>
+  {% with messages = get_flashed_messages()%} 
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <h2 class="mb-4 text-center">Agregar nueva receta</h2>
+<form action="" method="post" novalidate>
+    {{ form.csrf_token }}
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    <div class="mb-3">
+        {{ macros.campo_form(form.nombreReceta) }}
+    </div>
+
+    <div class="mb-3">
+        {{ macros.campo_form(form.descripcion)}}
+    </div>
+
+    <h3 class="mt-4 mb-3">Ingredientes</h3>
+    
+    <div id="ingredientes"></div>
+    <button type="button" class="btn btn-primary btn-sm mb-3" onclick="agregarIngrediente()">Agregar ingrediente</button>
+    
+    <div class="mb-3">
+        {{ form.ingredientes }}
+    </div>
+    
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success btn-sm">Guardar receta</button>
+    </div>
+</form>
+
+
+    <br><br><div class="table-container">
+        <table class="table table-bordered align-middle table responsive" >
+          <thead class="">
+            <tr>
+              <th scope="col">Nombre Receta</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Ingredientes</th>
+              <th scope="col">Modificar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for recet in receta %}
+            <tr>
+              <td>{{recet.nombreReceta}}</td>
+              <td>{{recet.Descripccion}}</td>
+              <td>
+                <ul class="list-unstyled">
+                  {% for ingrediente in recet.ingredientes %}
+                    <li><strong>{{ ingrediente.insumo }}:</strong> {{ ingrediente.cantidad }} {{ ingrediente.unidad }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+              
+                <td>
+                  <a href="modificar?idReceta={{recet.idReceta}}" class="btn btn-warning d-flex align-items-center gap-2">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z" clip-rule="evenodd"/>
+                    </svg>
+                    Modificar
+                  </a>
+                </td>
+              <td>
+                <a href="/eliminar?idReceta={{recet.idReceta}}" class="btn btn-danger d-flex align-items-center gap-2">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+                  </svg>
+                  Eliminar
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>      
+</body>
+    
+{% endblock %}

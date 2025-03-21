@@ -1,0 +1,84 @@
+{% extends "layout_galleteria.html" %}
+{% import '_macros.html' as macros %}   
+{% block container %}
+
+<head>
+    <meta charset="UTF-8">
+    <h1><title>Modificar Receta</title></h1>
+    <script>
+        function agregarIngrediente() {
+            const contenedor = document.getElementById('ingredientes');
+            const index = contenedor.children.length + 1;
+
+            const campo = document.createElement('div');
+            campo.classList.add('mb-2');
+            campo.innerHTML = `
+                <input type="text" name="insumo[]" placeholder="Nombre del insumo" required>
+                <input type="number" name="cantidad[]" placeholder="Cantidad" required>
+                <input type="text" name="unidad[]" placeholder="Unidad (g, ml, piezas)" required>
+                <button type="button" onclick="this.parentNode.remove()">Eliminar</button>
+            `;
+            contenedor.appendChild(campo);
+        }
+
+        window.onload = function() {
+            const ingredientesJSON = document.getElementById('ingredientes-data').getAttribute('data-ingredientes');
+            console.log('Ingredientes cargados:', ingredientesJSON);
+            const ingredientes = JSON.parse(ingredientesJSON);
+
+            ingredientes.forEach(function(ingrediente) {
+                agregarIngrediente(); 
+
+                const inputs = document.querySelectorAll('#ingredientes div:last-child input');
+                
+
+                inputs[0].value = ingrediente.insumo;  
+                inputs[1].value = ingrediente.cantidad;  
+                inputs[2].value = ingrediente.unidad; 
+            });
+        };
+    </script>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h2 class="mb-4 text-center">Modificar receta</h2>
+
+    <form action="" method="post" novalidate>
+        {{ form.csrf_token }}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="mb-3">
+            {{ macros.campo_form(form.nombreReceta) }}
+        </div>
+
+        <div class="mb-3">
+            {{ macros.campo_form(form.descripcion) }}
+        </div>
+
+        <h3 class="mt-4 mb-3">Ingredientes</h3>
+        
+        <div id="ingredientes"></div>
+        <button type="button" class="btn btn-primary btn-sm mb-3" onclick="agregarIngrediente()">Agregar ingrediente</button>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success btn-sm">Guardar cambios</button>
+        </div>
+    </form>
+
+    <!-- Solo mostramos los ingredientes de la receta actual -->
+    <div id="ingredientes-data" data-ingredientes='{{ receta.ingredientes | tojson | safe }}'></div>
+
+
+</body>
+
+{% endblock %}
