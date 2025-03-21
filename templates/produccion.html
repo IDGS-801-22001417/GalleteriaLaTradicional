@@ -1,0 +1,41 @@
+{% extends "layout_galleteria.html" %}
+
+{% block title %}Producción de Galletas{% endblock %}
+
+{% block styles %}
+    <link href="{{ url_for('static', filename='css/estilos_produccion.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url_for('static', filename='css/merma.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="container centrado">
+        {% for i in range(0, galletas|length, 5) %}
+        <div class="row">
+            {% for galleta in galletas[i:i+5] %}
+            <div class="flipCard">
+                <div class="flipCardInterior">
+                    <div class="flipCardFrontal">
+                        <div id="circle-{{ galleta.id }}" class="status-circle status-red">
+                            <img src="{{ url_for('static', filename='img/galletas.png') }}" alt=""/>
+                        </div>
+                        <span id="contador-{{ galleta.id }}" class="contador">{{ galleta.cantidad }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="modal-buttons">
+        <button>
+            <img src="{{ url_for('static', filename='img/galleta.png') }}" width="30" height="30" alt=""/>
+        </button>
+        
+        <button>
+            <img src="{{ url_for('static', filename='img/borrarmerma.png') }}" width="30" height="30" alt=""/>
+        </button>
+    </div>
+{% endblock %}
+

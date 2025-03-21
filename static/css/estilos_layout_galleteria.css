@@ -8,10 +8,14 @@ body {
 .header {
     margin-left: 200px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin-top: 40px;
 =======
     margin-top: 55px;
 >>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64
+=======
+    margin-top: 55px;
+>>>>>>> 29e4626d003441249df87b45c3beeeb31ecd6b87
     margin-bottom: 20px;
     background-color: #a65323;
     color: #fff;
@@ -24,12 +28,17 @@ body {
 
 .logo {
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin-top: 3px;
     margin-left: 13px;
 =======
     margin-top: 13px;
     margin-left: 15px;
 >>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64
+=======
+    margin-top: 13px;
+    margin-left: 15px;
+>>>>>>> 29e4626d003441249df87b45c3beeeb31ecd6b87
     width: 125px;
     height: 125px;
     position: absolute;
@@ -56,6 +65,7 @@ body {
     font-weight: bold;
     text-decoration: underline;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
@@ -78,3 +88,6 @@ body {
     background-color: #F1B384;
 }
 >>>>>>> c942b45263fb9a0ed9eba666ca17b62a21488d64
+=======
+}
+>>>>>>> 29e4626d003441249df87b45c3beeeb31ecd6b87
