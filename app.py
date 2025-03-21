@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask import flash
 from flask_wtf.csrf import CSRFProtect
@@ -14,6 +15,21 @@ from models import db, Persona, Usuario, Empleado
 app = Flask(__name__)
 app.config.from_object(DeveplopmentConfig)
 csrf = CSRFProtect()
+=======
+from flask import Flask, render_template, request, redirect, url_for
+from flask import flash
+from flask_wtf import CSRFProtect
+from flask import g
+from config import DevelopmentConfig
+import forms
+
+from models import db
+from models import Insumos, Proveedores, LoteInsumo
+
+app = Flask(__name__)
+app.config.from_object(DevelopmentConfig)
+csrf=CSRFProtect()
+>>>>>>> 7e3fd8070f77aff622f8ed40d20694162f7d7252
 
 @app.route("/galletas")
 def galletas():
@@ -21,17 +37,31 @@ def galletas():
 
 @app.route("/ventas")
 def ventas():
+<<<<<<< HEAD
     return render_template("Ventas.html", active_page="ventas")
+=======
+    return render_template("layout_galleteria.html", active_page="ventas")
+>>>>>>> 7e3fd8070f77aff622f8ed40d20694162f7d7252
 
 @app.route("/produccion")
 def produccion():
     return render_template("layout_login.html", active_page="produccion")
 
+<<<<<<< HEAD
 @app.route("/insumos")
 def insumos():
     return render_template("insumos.html", active_page="insumos")
 
 @app.route("/ordenes")
+=======
+@app.route("/insumos", methods=["GET", "POST"])
+def insumos():
+    create_form=forms.UserForm2(request.form)
+    insumos=Insumos.query.all() # select*from insumos
+    return render_template("Insumos.html", form=create_form, insumos=insumos, active_page="insumos")
+
+@app.route("/Ordenes")
+>>>>>>> 7e3fd8070f77aff622f8ed40d20694162f7d7252
 def ordenes():
     return render_template("ordenes.html", active_page="ordenes")
 
@@ -39,6 +69,7 @@ def ordenes():
 def ganancias():
     return render_template("ganancias.html", active_page="ganancias")
 
+<<<<<<< HEAD
 @app.route("/administracion")
 def administracion():
     return render_template("Layaut_administracion.html", active_page="administracion")
@@ -181,6 +212,11 @@ def clientes():
 def recetas():
     return render_template("Recetas.html", active_page="recetas")
 
+=======
+@app.route("/administrador")
+def administrador():
+    return render_template("administrador.html", active_page="administrador")
+>>>>>>> 7e3fd8070f77aff622f8ed40d20694162f7d7252
 
 if __name__ == '__main__':
     csrf.init_app(app)
@@ -188,4 +224,8 @@ if __name__ == '__main__':
     
     with app.app_context():
         db.create_all()
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+app.run()
+>>>>>>> 7e3fd8070f77aff622f8ed40d20694162f7d7252

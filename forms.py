@@ -1,4 +1,5 @@
 from wtforms import Form
+<<<<<<< HEAD
 from wtforms import StringField, PasswordField, EmailField, FloatField, DateField, IntegerField, SelectField
 from wtforms import validators
 
@@ -65,3 +66,24 @@ class EmpleadoForm(Form):
     fechaIngreso = DateField('Fecha de Ingreso:', [
         validators.InputRequired(message="La fecha de ingreso es obligatoria.")
     ], format='%Y-%m-%d')
+=======
+from wtforms import StringField, PasswordField, EmailField, BooleanField, IntegerField,SubmitField
+from wtforms import validators
+
+class UserForm2(Form):
+    id_insumo=IntegerField('id_insumo',
+    [validators.number_range(min=1, max=20,message='valor no valido')])
+    
+    nombreInsumo=StringField('nombreInsumo',[
+        validators.DataRequired(message='El nombre es requerido'),
+        validators.length(min=3,max=20, message='requiere min=3 max=20')
+    ])
+
+    unidad=StringField('unidad',[
+        validators.DataRequired(message='El apellido es requerido')
+    ])
+
+    total=IntegerField('total',[
+        validators.DataRequired(message='El total es requerido')
+    ])
+>>>>>>> 7e3fd8070f77aff622f8ed40d20694162f7d7252
