@@ -34,6 +34,9 @@
 }
 .custom-button-container {
     margin-bottom: 0px;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
 }
 .custom-button-container .custom-btn {
     background-color: #a65323;

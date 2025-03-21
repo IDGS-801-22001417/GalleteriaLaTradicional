@@ -5,6 +5,7 @@ from flask import g
 from flask import flash
 from config import DeveplopmentConfig
 from sqlalchemy import func, extract
+from sqlalchemy.sql import text
 import forms
 import os
 from datetime import datetime
@@ -56,6 +57,13 @@ def usuarios():
 @app.route('/registroEmpleado', methods=['GET', 'POST'])
 def registroEmpleado():
     empleado_class = forms.EmpleadoForm(request.form)
+    empleados = Empleado.query.join(Persona).join(Usuario).all()
+
+    rol_etiquetas = {
+        'ADMI': 'Administrador',
+        'CAJA': 'Cajero',
+        'PROD': 'Producción'
+    }
 
     if request.method == 'POST' and empleado_class.validate():
         try:
@@ -67,6 +75,8 @@ def registroEmpleado():
             dia_mes = fecha_registro.strftime('%d%m')
 
             rol = empleado_class.rol.data.upper()
+
+            puesto = rol_etiquetas.get(rol, 'Desconocido')
 
             nombre_usuario = f"{ap_paterno}{ap_materno}{nombre}{dia_mes}{rol}"
 
@@ -86,6 +96,7 @@ def registroEmpleado():
             )
             db.session.add(persona)
             db.session.commit()
+            ultimo_id_persona = persona.idPersona
 
             usuario = Usuario(
                 nombreUsuario=nombre_usuario,
@@ -95,15 +106,16 @@ def registroEmpleado():
             )
             db.session.add(usuario)
             db.session.commit()
+            ultimo_id_usuario = usuario.idUsuario
 
             empleado = Empleado(
-                puesto=empleado_class.puesto.data,
+                puesto=puesto,
                 curp=empleado_class.curp.data,
                 rfc=empleado_class.rfc.data,
                 salarioBruto=empleado_class.salarioBruto.data,
                 fechaIngreso=empleado_class.fechaIngreso.data,
-                idPersona=persona.idPersona,
-                idUsuario=usuario.idUsuario
+                idPersona=ultimo_id_persona,
+                idUsuario=ultimo_id_usuario
             )
             db.session.add(empleado)
             db.session.commit()
@@ -114,7 +126,7 @@ def registroEmpleado():
             db.session.rollback()
             flash('Error al registrar el empleado', 'danger')
 
-    return render_template("Usuarios.html", active_page="usuarios", form=empleado_class)
+    return render_template("Usuarios.html", active_page="usuarios", form=empleado_class, empleados=empleados)
 
 @app.route("/detallesEmpleado", methods=['GET', 'POST'])
 def detallesEmpleados():

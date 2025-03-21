@@ -40,14 +40,14 @@
                         </td>
                         <td>
                             <div class="d-flex justify-content-center align-items-center">
+                                <a href="detallesEmpleado?idEmpleado={{empleado.idEmpleado}}" class="btn btn-link text-dark">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
                                 <a href="modificarEmpleado?idEmpleado={{empleado.idEmpleado}}" class="btn btn-link text-dark me-2">
                                     <i class="fas fa-edit fa-lg"></i>
                                 </a>
                                 <a href="eliminarEmpleado?idEmpleado={{empleado.idEmpleado}}" class="btn btn-link text-dark">
                                     <i class="fa-solid fa-trash-can fa-lg"></i>
-                                </a>
-                                <a href="detallesEmpleado?idEmpleado={{empleado.idEmpleado}}" class="btn btn-link text-dark">
-                                    <i class="fa-solid fa-circle-info"></i>
                                 </a>
                             </div>
                         </td>
@@ -130,13 +130,10 @@
                             <fieldset class="mb-4">
                                 <legend>Datos del Empleado</legend>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        {{macro.camposNuevos(form.puesto, class="form-control", placeholder="Puesto")}}
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         {{macro.camposNuevos(form.curp, class="form-control", placeholder="CURP")}}
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         {{macro.camposNuevos(form.rfc, class="form-control", placeholder="RFC")}}
                                     </div>
                                 </div>

@@ -45,23 +45,11 @@ class EmpleadoForm(Form):
     fechaNacimiento = DateField('Fecha de Nacimiento:', [
         validators.InputRequired(message="La fecha de nacimiento es obligatoria.")
     ], format='%Y-%m-%d')
-    nombreUsuario = StringField('Nombre de Usuario:', [
-        validators.InputRequired(message="El nombre de usuario es obligatorio."),
-        validators.Length(max=20, message="Máximo 20 caracteres.")
-    ])
-    contrasenia = PasswordField('Contraseña:', [
-        validators.InputRequired(message="La contraseña es obligatoria."),
-        validators.Length(min=8, max=16, message="La contraseña debe tener entre 8 y 16 caracteres.")
-    ])
     rol = SelectField('Rol:', choices=[
         ('ADMI', 'Administrador'),
         ('CAJA', 'Cajero'),
         ('PROD', 'Producción')
     ], validators=[validators.InputRequired(message="El rol es obligatorio.")])
-    puesto = StringField('Puesto:', [
-        validators.InputRequired(message="El puesto es obligatorio."),
-        validators.Length(max=45, message="Máximo 45 caracteres.")
-    ])
     curp = StringField('CURP:', [
         validators.InputRequired(message="El CURP es obligatorio."),
         validators.Length(min=18, max=18, message="El CURP debe tener 18 caracteres.")
